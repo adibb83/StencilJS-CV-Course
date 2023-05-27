@@ -6,56 +6,92 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface CvContainer {
+    }
+    interface CvInput {
+        "disabled": boolean;
+        "placeholder": string;
+    }
+    interface CvSelect {
+        "defaltValue": string;
+        "lable": string;
+        "selectOptions": string[];
+    }
+    interface CvTextarea {
+        "disabled": boolean;
+        "placeholder": string;
+        "rows": number;
     }
 }
+export interface CvSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCvSelectElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLCvContainerElement extends Components.CvContainer, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLCvContainerElement: {
+        prototype: HTMLCvContainerElement;
+        new (): HTMLCvContainerElement;
+    };
+    interface HTMLCvInputElement extends Components.CvInput, HTMLStencilElement {
+    }
+    var HTMLCvInputElement: {
+        prototype: HTMLCvInputElement;
+        new (): HTMLCvInputElement;
+    };
+    interface HTMLCvSelectElement extends Components.CvSelect, HTMLStencilElement {
+    }
+    var HTMLCvSelectElement: {
+        prototype: HTMLCvSelectElement;
+        new (): HTMLCvSelectElement;
+    };
+    interface HTMLCvTextareaElement extends Components.CvTextarea, HTMLStencilElement {
+    }
+    var HTMLCvTextareaElement: {
+        prototype: HTMLCvTextareaElement;
+        new (): HTMLCvTextareaElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "cv-container": HTMLCvContainerElement;
+        "cv-input": HTMLCvInputElement;
+        "cv-select": HTMLCvSelectElement;
+        "cv-textarea": HTMLCvTextareaElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface CvContainer {
+    }
+    interface CvInput {
+        "disabled"?: boolean;
+        "placeholder"?: string;
+    }
+    interface CvSelect {
+        "defaltValue"?: string;
+        "lable"?: string;
+        "onOnSelectChange"?: (event: CvSelectCustomEvent<string>) => void;
+        "selectOptions"?: string[];
+    }
+    interface CvTextarea {
+        "disabled"?: boolean;
+        "placeholder"?: string;
+        "rows"?: number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "cv-container": CvContainer;
+        "cv-input": CvInput;
+        "cv-select": CvSelect;
+        "cv-textarea": CvTextarea;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "cv-container": LocalJSX.CvContainer & JSXBase.HTMLAttributes<HTMLCvContainerElement>;
+            "cv-input": LocalJSX.CvInput & JSXBase.HTMLAttributes<HTMLCvInputElement>;
+            "cv-select": LocalJSX.CvSelect & JSXBase.HTMLAttributes<HTMLCvSelectElement>;
+            "cv-textarea": LocalJSX.CvTextarea & JSXBase.HTMLAttributes<HTMLCvTextareaElement>;
         }
     }
 }

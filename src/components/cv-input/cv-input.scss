@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.cv-input {
+  font-size:1rem;
+  display:block;
+  border:1px solid #757575;
+  border-radius: 5px;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+
+.cv-error{
+  color:red;
+  word-wrap: break-word;
+}
