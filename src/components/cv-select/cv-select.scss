@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.select-container {
+  margin: 0.5rem 0;
+  width: 100%;
+
+  .selected-option, .select-options {
+    display: block;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+  }
+
+
+  .selected-option{
+    padding: 0.5rem;
+  }
+
+  .option{
+    cursor: pointer;
+    padding: 10px;
+    &:hover{
+      background-color: #b6bdff;
+    }
+  }
+}
