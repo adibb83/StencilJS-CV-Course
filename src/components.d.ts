@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CvContainer {
     }
+    interface CvForm {
+    }
     interface CvInput {
         "disabled": boolean;
         "placeholder": string;
@@ -23,9 +25,17 @@ export namespace Components {
         "rows": number;
     }
 }
+export interface CvInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCvInputElement;
+}
 export interface CvSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCvSelectElement;
+}
+export interface CvTextareaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCvTextareaElement;
 }
 declare global {
     interface HTMLCvContainerElement extends Components.CvContainer, HTMLStencilElement {
@@ -33,6 +43,12 @@ declare global {
     var HTMLCvContainerElement: {
         prototype: HTMLCvContainerElement;
         new (): HTMLCvContainerElement;
+    };
+    interface HTMLCvFormElement extends Components.CvForm, HTMLStencilElement {
+    }
+    var HTMLCvFormElement: {
+        prototype: HTMLCvFormElement;
+        new (): HTMLCvFormElement;
     };
     interface HTMLCvInputElement extends Components.CvInput, HTMLStencilElement {
     }
@@ -54,6 +70,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "cv-container": HTMLCvContainerElement;
+        "cv-form": HTMLCvFormElement;
         "cv-input": HTMLCvInputElement;
         "cv-select": HTMLCvSelectElement;
         "cv-textarea": HTMLCvTextareaElement;
@@ -62,23 +79,28 @@ declare global {
 declare namespace LocalJSX {
     interface CvContainer {
     }
+    interface CvForm {
+    }
     interface CvInput {
         "disabled"?: boolean;
+        "onCvInputChange"?: (event: CvInputCustomEvent<string>) => void;
         "placeholder"?: string;
     }
     interface CvSelect {
         "defaltValue"?: string;
         "lable"?: string;
-        "onOnSelectChange"?: (event: CvSelectCustomEvent<string>) => void;
+        "onCvSelectChange"?: (event: CvSelectCustomEvent<string>) => void;
         "selectOptions"?: string[];
     }
     interface CvTextarea {
         "disabled"?: boolean;
+        "onCvTextAreaChange"?: (event: CvTextareaCustomEvent<string>) => void;
         "placeholder"?: string;
         "rows"?: number;
     }
     interface IntrinsicElements {
         "cv-container": CvContainer;
+        "cv-form": CvForm;
         "cv-input": CvInput;
         "cv-select": CvSelect;
         "cv-textarea": CvTextarea;
@@ -89,6 +111,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cv-container": LocalJSX.CvContainer & JSXBase.HTMLAttributes<HTMLCvContainerElement>;
+            "cv-form": LocalJSX.CvForm & JSXBase.HTMLAttributes<HTMLCvFormElement>;
             "cv-input": LocalJSX.CvInput & JSXBase.HTMLAttributes<HTMLCvInputElement>;
             "cv-select": LocalJSX.CvSelect & JSXBase.HTMLAttributes<HTMLCvSelectElement>;
             "cv-textarea": LocalJSX.CvTextarea & JSXBase.HTMLAttributes<HTMLCvTextareaElement>;

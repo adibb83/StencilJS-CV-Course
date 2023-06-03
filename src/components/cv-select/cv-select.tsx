@@ -12,7 +12,9 @@ export class CvSelect {
   @Prop() defaltValue: string = '';
   @State() value: string = this.defaltValue;
   @State() isOpen: boolean = false;
-  @Event() onSelectChange: EventEmitter<string>;
+  @Event({
+    eventName:'cvSelectChange'
+  }) cvSelectChange: EventEmitter<string>;
 
 
   componentWillLoad(){
@@ -22,7 +24,7 @@ export class CvSelect {
   onOptionClick(option: string){
     this.value = option;
     this.isOpen = false;
-    this.onSelectChange.emit(this.value);
+    this.cvSelectChange.emit(this.value);
   }
 
   toggleSelectOpen(){
