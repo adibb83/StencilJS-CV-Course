@@ -28,10 +28,7 @@ export class CvTextarea {
 
   render() {
     return (
-      <div>
         <textarea class="cv-textarea" value={this.value} onInput={(e) => this.handleChange(e)} rows={this.rows} disabled={this.disabled} placeholder={this.placeholder}></textarea>
-      </div>
-
     );
   }
 

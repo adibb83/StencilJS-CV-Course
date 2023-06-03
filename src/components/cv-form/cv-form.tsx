@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 export interface MyForm {
   name?: string;
