@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Prop, State, Watch, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'cv-input',
@@ -12,11 +12,17 @@ export class CvInput {
   @Prop() disabled: boolean = false;
   @Prop() placeholder: string;
 
+  @Event({
+    eventName:'cvInputChange'
+  }) cvInputChange: EventEmitter<string>;
+
   handleChange(event) {
     this.value = event.target.value;
 
     if (event.target.validity.typeMismatch) {
       console.log('this element is not valid')
+    } else {
+      this.cvInputChange.emit(this.value);
     }
   }
 
